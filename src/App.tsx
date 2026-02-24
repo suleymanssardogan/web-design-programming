@@ -71,7 +71,16 @@ function App() {
         <section id="iletisim" className="card section-glass">
           <h2>İletişim</h2>
 
-          <form action="#" method="POST" noValidate className="contact-form">
+          <form
+            action="#"
+            method="POST"
+            noValidate
+            className="contact-form"
+            onSubmit={(e) => {
+              e.preventDefault();
+              alert("Mesajınız gönderildi! (Geliştirme aşamasında)");
+            }}
+          >
             <fieldset>
               <legend className="sr-only">İletişim Formu</legend>
 
