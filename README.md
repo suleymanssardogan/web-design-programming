@@ -1,8 +1,8 @@
-# Web LAB-1 - Hello Project
+# Fırat Üniversitesi Teknoloji Fakültesi Yazılım Mühendisliği 3. Sınıf Dersi Web Tasarım ve Programlama Laboratuvar Çalışmaları
+**Süleyman Sardoğan**
 
 ## Hakkinda
-Bu proje, Web Tasarimi ve Programlama dersi LAB-1 kapsaminda
-Vite + React + TypeScript kullanilarak olusturulmustur.
+Bu proje, Fırat Üniversitesi Teknoloji Fakültesi Yazılım Mühendisliği 3. sınıf dersi olan Web Tasarım ve Programlama Laboratuvar Çalışmaları kapsamında Vite + React + TypeScript kullanılarak oluşturulmuştur.
 
 ## Gelistirici
 - **Ad Soyad:** Süleyman Sardoğan
@@ -26,10 +26,10 @@ Tarayicida http://localhost:5173 adresini ac.
 
 ---
 
-## Kendini Test Et (Sorular ve Cevaplar)
+## Sorular ve Cevaplar
 
 **1. Terminal nedir ve neden GUI yerine terminal kullanılır?**
-Terminal, işletim sistemine metin tabanlı komutlar vererek bilgisayarı yönetmemizi sağlayan bir arayüzdür. GUI (Grafiksel Kullanıcı Arayüzü) yerine terminal kullanılmasının sebebi; geliştirme araçlarının ekseriyetle terminal üzerinden çalışıp daha hızlı, daha fazla özelleştirilebilir işlem yapılmasını ve otomasyon süreçlerinin kolaylaştırılmasını sağlamasıdır.
+Terminal, işletim sistemine metin tabanlı komutlar vererek bilgisayarı yönetmemizi sağlayan bir arayüzdür. GUI (Grafiksel Kullanıcı Arayüzü) yerine terminal kullanılmasının sebebi; geliştirme araçlarının ekseriyetle terminal üzerinden çalışıp daha hızlı, daha fazla özelleştirilebilir işlem yapılmasını ve otomasyon süreçlerinin kolaylaştırılmasını sağlamasıdır.Terminal sebepleri standartlaştırma, hız ve otomasyon ön plandadır .
 
 **2. Node.js ne işe yarar? Tarayıcı zaten JavaScript çalıştırıyorsa neden Node.js’e ihtiyacımız var?**
 Node.js, JavaScript kodunu tarayıcı (browser) dışında, doğrudan bilgisayar üzerinde (sunucu ortamında) çalıştırabilmemizi sağlayan bir çalışma zamanı (runtime) ortamıdır. Modern web geliştirme araçlarının (Vite, yapılandırma paketleri vb.) birçoğu bilgisayarımızda çalışmak için Node.js ortamına ihtiyaç duyar.
