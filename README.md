@@ -11,3 +11,37 @@ Bu yüksek ve eşiksiz skor, portföy web sitemizin ekran okuyucu yazılımları
 
 ![Lighthouse Erişilebilirlik Raporu](./lighthouse-rapor.png)
 *(Not: Öğrenci Lighthouse ekran görüntüsünü bu isim ile proje dosyalarına ayrıca yükleyecektir)*
+
+---
+
+## LAB-2: Kendini Test Et (Sorular ve Cevaplar)
+
+**1. Semantik HTML ne demektir? `<div>` ile `<section>` arasındaki fark nedir?**
+Semantik HTML, kodun sadece görsel yapıyı değil içeriğin anlamını da yansıtmasıdır. `<div>` sadece sayfa düzeni için anlamsız bir kutuyken, `<section>` kendi içinde bir bütünlüğü ve anlamı olan, genellikle bir başlığı olan tematik bölümleri ifade eder.
+
+**2. `<main>` etiketi neden sayfada yalnızca bir kez kullanılmalıdır?**
+`<main>` etiketi sayfanın asıl bağımsız ve temel içeriğini temsil eder. Sayfada birden fazla ana içerik ol(a)maz; ayrıca ekran okuyucular için "ana içeriğe atla" gibi kısayolların doğru çalışması için tek bir tane olmalıdır.
+
+**3. Erişilebilirlik (a11y) nedir ve kimler yararlanır?**
+Erişilebilirlik (a11y), web içeriklerinin başta görme, işitme veya motor engeli olan bireyler olmak üzere geçici engelli veya yaşlı kullanıcılar da dahil herkes tarafından sorunsuz kullanılabilir olmasıdır.
+
+**4. Heading hiyerarşisinde seviye atlamak neden sorunludur?**
+Heading hiyerarşisinde seviye atlamak (örneğin h1'den direkt h3'e geçmek), ekran okuyucuların sayfa yapısını okurken bölüm yapısının kırıldığını düşünmesine sebep olur. Okuyucu için bir kitabın ana bölümünden sonra alt başlık olmadan alt-alt başlığa geçmek gibi mantıksızlaşır.
+
+**5. `alt=""` ile `alt` özniteliğini hiç yazmamak arasındaki fark nedir?**
+`alt` özniteliğini hiç yazmamak cihazda/tarayıcıda büyük bir erişilebilirlik hatası (Eksik bilgi) olarak değerlendirilirken; `alt=""` yazılması programcı tarafından bilerek boş bırakıldığı ve içeriğin "sadece dekoratif" olup ekran okuyucu tarafından tamamen es geçilmesi gerektiği anlamına gelir.
+
+**6. ARIA ne zaman kullanılmalıdır? “Altın kuralı” nedir?**
+ARIA, HTML ile doğuştan tanımlanamayan ekran davranışlarına ekstra erişilebilirlik bilgisi/durumu eklemek için kullanılır (Örn: özel popup vs). Altın Kural: *"Eğer bir işlemi yapabilen standart (native) bir HTML etiketi varsa, daima ilk olarak o kullanılmalı; ARIA kullanılmamalıdır."*
+
+**7. `<label>` ile form input ilişkisi neden zorunludur? placeholder neden yeterli değildir?**
+`<label>` ve `input` ilişkisi, ekran okuyucuların kullanıcılara alanı düzgün okuyabilmesi ve farenin tıklama alanını genişletmek (laba'la tıklanıldığında da inputa odaklanılması) için şarttır. Placeholder kalıcı değildir, metin yazıldığında silinir ve standart ekran okuyucular tarafından okunması tamamen güvenilir değildir.
+
+**8. `required`, `minlength` ve `pattern` öznitelikleri ne işe yarar?**
+`required` alanın bilerek boş bırakılamayacağını, `minlength` içine girilen verinin belli bir karakter sınırından uzun olmasını, `pattern` ise içerik girişinin belirli bir "Kurallı İfadeye (RegEX formatına)" uygun olup olmadığını denetler (Örn: şifre standartları).
+
+**9. Tab ile gezinme neden önemlidir? Focus göstergesi neden kaldırılmamalıdır?**
+Motor engelinden dolayı fare kullanamayan kişiler sayfada bağlantılar arası geçişleri sadece "Tab" tuşuyla sağlar. Focus (odak) işaretinin (dış kenarlıkların) kaldırılması, kullanıcının o an hangi butonda olduğunu görememesine ve bu yüzden sitenin klavye ile kullanılamaz hale gelmesine yol açar.
+
+**10. Lighthouse erişilebilirlik puanı 100 olması, sitenin tamamen erişilebilir olduğu anlamına gelir mi?**
+Hayır. Lighthouse ve benzer araçlar yalnızca algoritmik ve otomatik kuralları (renk kontrastı, alt etiketlerin varlığı, labellar vb.) belirler. Gerçek insan deneyimine veya kompleks özel cihazlara yönelik tüm spesifik senaryoları ölçemeyeceği için manuel (insanlı) ekran okuyucu testi her zaman gereklidir.
