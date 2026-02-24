@@ -6,7 +6,7 @@ Vite + React + TypeScript kullanilarak olusturulmustur.
 
 ## Gelistirici
 - **Ad Soyad:** Süleyman Sardoğan
-- **Ogrenci No:** [Numaranızı Buraya Yazınız]
+- **Ogrenci No:** 220541069
 
 ## Kullanilan Teknolojiler
 - React 18
