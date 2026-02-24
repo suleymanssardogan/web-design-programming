@@ -1,35 +1,75 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import profilResmi from './assets/profil.jpg';
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <header>
+        <nav aria-label="Ana navigasyon">
+          <ul>
+            <li><a href="#hakkimda">Hakkimda</a></li>
+            <li><a href="#projeler">Projeler</a></li>
+            <li><a href="#iletisim">Iletisim</a></li>
+          </ul>
+        </nav>
+      </header>
+
+      {/* Tab ile gezinmede kullanıcıyı direkt ana içeriğe aktaran a11y skip-link bileşeni */}
+      <a href="#main-content" className="skip-link">
+        Ana icerige atla
+      </a>
+
+      <main id="main-content">
+        <section id="hakkimda">
+          <h2>Hakkimda</h2>
+          <figure>
+            <img
+              src={profilResmi}
+              alt="Süleyman Sardoğan'ın profil fotografi"
+            />
+            <figcaption>Süleyman Sardoğan</figcaption>
+          </figure>
+          <p>
+            Merhaba, ben Süleyman Sardoğan. Fırat Üniversitesi Teknoloji Fakültesi
+            Yazılım Mühendisliği 3. Sınıf öğrencisiyim. Web teknolojilerine ilgi duyuyor ve
+            modern, erişilebilir projeler geliştiriyorum.
+          </p>
+          <ul>
+            <li>JavaScript / TypeScript</li>
+            <li>React & Vite</li>
+            <li>HTML5 Semantic & a11y Erişilebilirlik Standartları</li>
+          </ul>
+        </section>
+
+        <section id="projeler">
+          <h2>Projelerim</h2>
+
+          <article>
+            <h3>Modern Web Portfolyosu</h3>
+            <p>Erişilebilirlik "a11y", semantik tasarımlar yapılmış portfolyo.</p>
+            <p><strong>Teknolojiler:</strong> React, TypeScript, HTML5, CSS3</p>
+            {/* Dekoratif görsel - ekran okuyucular es geçer. */}
+            <img src="" alt="" aria-hidden="true" style={{ display: 'none' }} />
+          </article>
+
+          <article>
+            <h3>Öğrenci Yönetim Sistemi</h3>
+            <p>Üniversite derslerinde yapılan veritabanı yönetimli basit proje.</p>
+            <p><strong>Teknolojiler:</strong> C#, MSSQL, Entity Framework</p>
+          </article>
+        </section>
+
+        <section id="iletisim">
+          <h2>Iletisim</h2>
+          {/* form buraya gelecek */}
+        </section>
+      </main>
+
+      <footer>
+        <p>&copy; 2026 Süleyman Sardoğan. Tum haklari saklidir.</p>
+      </footer>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
