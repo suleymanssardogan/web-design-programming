@@ -137,6 +137,12 @@ function App() {
 
       <footer className="main-footer">
         <p>&copy; 2026 Süleyman Sardoğan. Tum haklari saklidir.</p>
+        <nav aria-label="Sosyal medya baglantilari" className="social-links">
+          <ul>
+            <li><a href="https://github.com/suleymanssardogan" target="_blank" rel="noopener noreferrer" aria-label="GitHub profilimi aç">GitHub</a></li>
+            <li><a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profilimi aç">LinkedIn</a></li>
+          </ul>
+        </nav>
       </footer>
     </div>
   );

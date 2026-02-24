@@ -259,4 +259,26 @@ textarea:focus {
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   padding-top: 2rem;
   margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.social-links ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.social-links a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.social-links a:hover {
+  color: var(--primary-hover);
+  text-decoration: underline;
 }
