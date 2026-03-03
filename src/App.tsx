@@ -5,6 +5,7 @@ function App() {
   return (
     <div className="portfolio-container">
       <header className="main-header">
+        <div className="site-title">Süleyman Sardoğan</div>
         <h1 className="sr-only">Süleyman Sardoğan - Kişisel Portfolyo</h1>
         <nav aria-label="Ana navigasyon">
           <ul className="nav-links">
@@ -23,28 +24,32 @@ function App() {
       <main id="main-content" className="main-content">
         <section id="hakkimda" className="card section-glass">
           <h2>Hakkımda</h2>
-          <figure className="profile-figure">
-            <img
-              src={profilResmi}
-              alt="Süleyman Sardoğan'ın profil fotografi"
-              className="profile-img"
-            />
-            <figcaption className="sr-only">Süleyman Sardoğan</figcaption>
-          </figure>
+          <div className="about-content">
+            <figure className="profile-figure">
+              <img
+                src={profilResmi}
+                alt="Süleyman Sardoğan'ın profil fotografi"
+                className="profile-img"
+              />
+              <figcaption className="sr-only">Süleyman Sardoğan</figcaption>
+            </figure>
 
-          <p className="about-text">
-            Merhaba, ben Süleyman Sardoğan. Fırat Üniversitesi Teknoloji Fakültesi
-            Yazılım Mühendisliği 3. Sınıf öğrencisiyim. Web teknolojilerine ilgi duyuyor ve
-            modern, erişilebilir projeler geliştiriyorum.
-          </p>
+            <div className="about-details">
+              <p className="about-text">
+                Merhaba, ben Süleyman Sardoğan. Fırat Üniversitesi Teknoloji Fakültesi
+                Yazılım Mühendisliği 3. Sınıf öğrencisiyim. Web teknolojilerine ilgi duyuyor ve
+                modern, erişilebilir projeler geliştiriyorum.
+              </p>
 
-          <div className="tech-stack">
-            <h3>Kullandığım Teknolojiler</h3>
-            <ul>
-              <li>JavaScript / TypeScript</li>
-              <li>React & Vite</li>
-              <li>HTML5 Semantic & a11y Erişilebilirlik Standartları</li>
-            </ul>
+              <div className="tech-stack">
+                <h3>Kullandığım Teknolojiler</h3>
+                <ul className="skill-tags" role="list" aria-label="Beceri etiketleri">
+                  <li>JavaScript / TypeScript</li>
+                  <li>React & Vite</li>
+                  <li>HTML5 Semantic</li>
+                </ul>
+              </div>
+            </div>
           </div>
         </section>
 
