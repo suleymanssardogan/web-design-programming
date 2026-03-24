@@ -11,7 +11,7 @@
         "year": 2024,
         "category": "fullstack",
         "featured": true,
-        "image": "/images/ecommerce.jpg"
+        "image": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&q=80&w=800"
     },
     {
         "id": 2,
@@ -25,7 +25,7 @@
         "year": 2024,
         "category": "frontend",
         "featured": false,
-        "image": "/images/blog.jpg"
+        "image": "https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&q=80&w=800"
     },
     {
         "id": 3,
@@ -39,7 +39,7 @@
         "year": 2023,
         "category": "frontend",
         "featured": true,
-        "image": "/images/weather.jpg"
+        "image": "https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?auto=format&fit=crop&q=80&w=800"
     },
     {
         "id": 4,
@@ -53,7 +53,7 @@
         "year": 2024,
         "category": "frontend",
         "featured": false,
-        "image": "/images/taskboard.jpg"
+        "image": "https://images.unsplash.com/photo-1611224923853-80b023f02d71?auto=format&fit=crop&q=80&w=800"
     },
     {
         "id": 5,
@@ -67,6 +67,6 @@
         "year": 2023,
         "category": "fullstack",
         "featured": true,
-        "image": "/images/chat.jpg"
+        "image": "https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&q=80&w=800"
     }
 ]
