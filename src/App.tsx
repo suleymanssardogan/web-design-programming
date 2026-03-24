@@ -1,165 +1,144 @@
-import profilResmi from './assets/profil.jpg';
-import './App.css';
+import { useState, useEffect } from "react";
+import type {
+  Project, Category, SortField, SortOrder
+} from "./types/project";
+import { fetchProjects } from "./services/projectService";
+import { applyFilters } from "./utils/projectHelpers";
+import Card from "./components/Card";
+import Input from "./components/Input";
+import Button from "./components/Button";
+import Alert from "./components/Alert";
 
-function App() {
+export default function App() {
+  // --- STATE ---
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [search, setSearch] = useState("");
+  const [category, setCategory] = useState<Category | "all">("all");
+  const [sortField, setSortField] = useState<SortField>("year");
+  const [sortOrder, setSortOrder] = useState<SortOrder>("desc");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  // --- VERi CEKME ---
+  useEffect(() => {
+    async function load() {
+      try {
+        setLoading(true);
+        setError(null);
+        const data = await fetchProjects();
+        setProjects(data);
+      } catch (err) {
+        setError(
+          err instanceof Error
+            ? err.message
+            : "Bilinmeyen hata"
+        );
+      } finally {
+        setLoading(false);
+      }
+    }
+    load();
+  }, []);
+
+  // --- TURETILMIS (DERIVED) VERi ---
+  const filtered = applyFilters(
+    projects, search, category,
+    sortField, sortOrder
+  );
+
+  const categories: (Category | "all")[] = ["all", "frontend", "fullstack", "backend"];
+
+  // --- UI ---
   return (
-    <div className="portfolio-container">
-      <header className="main-header">
-        <div className="site-title">Süleyman Sardoğan</div>
-        <h1 className="sr-only">Süleyman Sardoğan - Kişisel Portfolyo</h1>
-        <nav aria-label="Ana navigasyon">
-          <ul className="nav-links">
-            <li><a href="#hakkimda">Hakkımda</a></li>
-            <li><a href="#projeler">Projeler</a></li>
-            <li><a href="#iletisim">İletişim</a></li>
-          </ul>
-        </nav>
-      </header>
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-950 p-4 md:p-8">
+      <div className="max-w-6xl mx-auto">
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">
+          Projelerim
+        </h1>
 
-      {/* a11y: Klavye kullanıcıları için skip-link */}
-      <a href="#main-content" className="skip-link">
-        Ana icerige atla
-      </a>
+        {/* HATA DURUMU */}
+        {error && (
+          <Alert variant="error" title="Hata">
+            {error}
+          </Alert>
+        )}
 
-      <main id="main-content" className="main-content">
-        <section id="hakkimda" className="card section-glass">
-          <h2>Hakkımda</h2>
-          <div className="about-content">
-            <figure className="profile-figure">
-              <img
-                src={profilResmi}
-                alt="Süleyman Sardoğan'ın profil fotografi"
-                className="profile-img"
-              />
-              <figcaption className="sr-only">Süleyman Sardoğan</figcaption>
-            </figure>
+        {/* FILTRELER */}
+        <div className="flex flex-col sm:flex-row gap-4 mb-8">
+          <Input id="search"
+            placeholder="Proje ara..."
+            value={search}
+            onChange={e => setSearch(e.target.value)} />
 
-            <div className="about-details">
-              <p className="about-text">
-                Merhaba, ben Süleyman Sardoğan. Fırat Üniversitesi Teknoloji Fakültesi
-                Yazılım Mühendisliği 3. Sınıf öğrencisiyim. Web teknolojilerine ilgi duyuyor ve
-                modern, erişilebilir projeler geliştiriyorum.
+          <div className="flex gap-2 flex-wrap">
+            {categories.map(cat => (
+              <Button key={cat}
+                variant={category === cat ? "primary" : "ghost"}
+                size="sm"
+                onClick={() => setCategory(cat)}>
+                {cat === "all" ? "Tumu" : cat}
+              </Button>
+            ))}
+          </div>
+
+          <div className="flex gap-2">
+            <select value={sortField}
+              onChange={e => setSortField(e.target.value as SortField)}
+              className="border rounded-lg px-3 py-2 dark:bg-gray-800 dark:text-white">
+              <option value="year">Yil</option>
+              <option value="title">Baslik</option>
+            </select>
+            <Button variant="ghost" size="sm"
+              onClick={() => setSortOrder(o => o === "asc" ? "desc" : "asc")}>
+              {sortOrder === "asc" ? "A-Z" : "Z-A"}
+            </Button>
+          </div>
+        </div>
+
+        {/* YUKLENIYOR */}
+        {loading && (
+          <p className="text-center text-gray-500">
+            Yukleniyor...
+          </p>
+        )}
+
+        {/* PROJE LISTESI */}
+        {!loading && filtered.length === 0 && (
+          <p className="text-center text-gray-500">
+            Eslesen proje bulunamadi.
+          </p>
+        )}
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filtered.map(project => (
+            <Card key={project.id}
+              variant="elevated"
+              title={project.title}
+              image={project.image}
+              imageAlt={`${project.title} ekran goruntusu`}>
+              <p className="text-sm mb-3">
+                {project.description}
               </p>
-
-              <div className="tech-stack">
-                <h3>Kullandığım Teknolojiler</h3>
-                <ul className="skill-tags" role="list" aria-label="Beceri etiketleri">
-                  <li>JavaScript / TypeScript</li>
-                  <li>React & Vite</li>
-                  <li>HTML5 Semantic</li>
-                </ul>
+              <div className="flex flex-wrap gap-1">
+                {project.tech.map(t => (
+                  <span key={t}
+                    className="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs px-2 py-0.5 rounded-full">
+                    {t}
+                  </span>
+                ))}
               </div>
-            </div>
-          </div>
-        </section>
+              <p className="text-xs text-gray-400 mt-2">
+                {project.year} &middot; {project.category}
+              </p>
+            </Card>
+          ))}
+        </div>
 
-        <section id="projeler" className="card section-glass">
-          <h2>Projelerim</h2>
-
-          <div className="projects-grid">
-            <article className="project-card">
-              <h3>Modern Web Portfolyosu</h3>
-              <p>Erişilebilirlik "a11y", semantik tasarımlar yapılmış portfolyo.</p>
-              <p className="project-tech"><strong>Teknolojiler:</strong> React, TypeScript, HTML5, CSS3</p>
-              <img src="" alt="" aria-hidden="true" style={{ display: 'none' }} />
-            </article>
-
-            <article className="project-card">
-              <h3>Öğrenci Yönetim Sistemi</h3>
-              <p>Üniversite derslerinde yapılan veritabanı yönetimli basit proje.</p>
-              <p className="project-tech"><strong>Teknolojiler:</strong> C#, MSSQL, Entity Framework</p>
-            </article>
-          </div>
-        </section>
-
-        {/* UYGULAMA 4: Doğrulamalı İletişim Formu */}
-        <section id="iletisim" className="card section-glass">
-          <h2>İletişim</h2>
-
-          <form
-            action="#"
-            method="POST"
-            noValidate
-            className="contact-form"
-            onSubmit={(e) => {
-              e.preventDefault();
-              alert("Mesajınız gönderildi! (Geliştirme aşamasında)");
-            }}
-          >
-            <fieldset>
-              <legend className="sr-only">İletişim Formu</legend>
-
-              <div className="form-group">
-                <label htmlFor="name">Ad Soyad:</label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  required
-                  minLength={2}
-                  aria-describedby="name-error"
-                />
-                <small id="name-error" className="error-msg" role="alert"></small>
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="email">E-posta:</label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  required
-                  aria-describedby="email-error"
-                />
-                <small id="email-error" className="error-msg" role="alert"></small>
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="subject">Konu:</label>
-                <select
-                  id="subject"
-                  name="subject"
-                  required
-                  aria-describedby="subject-error"
-                >
-                  <option value="">-- Seciniz --</option>
-                  <option value="is">Is Teklifi</option>
-                  <option value="soru">Soru</option>
-                  <option value="oneri">Oneri</option>
-                </select>
-                <small id="subject-error" className="error-msg" role="alert"></small>
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="message">Mesajiniz:</label>
-                <textarea
-                  id="message"
-                  name="message"
-                  rows={5}
-                  required
-                  minLength={10}
-                  aria-describedby="message-error"
-                ></textarea>
-                <small id="message-error" className="error-msg" role="alert"></small>
-              </div>
-
-              <button type="submit" className="submit-btn" aria-label="Mesajı gönder">Gönder</button>
-            </fieldset>
-          </form>
-        </section>
-      </main>
-
-      <footer className="main-footer">
-        <p>&copy; 2026 Süleyman Sardoğan. Tum haklari saklidir.</p>
-        <nav aria-label="Sosyal medya baglantilari" className="social-links">
-          <ul>
-            <li><a href="https://github.com/suleymanssardogan" target="_blank" rel="noopener noreferrer" aria-label="GitHub profilimi aç">GitHub</a></li>
-            <li><a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profilimi aç">LinkedIn</a></li>
-          </ul>
-        </nav>
-      </footer>
+        {/* SONUC SAYISI */}
+        <p className="text-sm text-gray-500 mt-4 text-center">
+          {filtered.length} / {projects.length} proje gosteriliyor
+        </p>
+      </div>
     </div>
   );
 }
-
-export default App;
