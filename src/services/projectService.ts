@@ -1,20 +1,13 @@
 import type { Project } from "../types/project";
 
-const API_URL = "/data/projects.json";
-
 export async function fetchProjects(): Promise<Project[]> {
-    try {
-        const response = await fetch(API_URL);
-
-        if (!response.ok) {
-            throw new Error(`Projeler yuklenemedi: ${response.status}`);
-        }
-
-        const data: Project[] = await response.json();
-        return data;
-
-    } catch (error) {
-        console.error("Veri cekme hatasi:", error);
-        throw error; // Hatayi yukari ilet
+  try {
+    const res = await fetch("/data/projects.json");
+    if (!res.ok) {
+        throw new Error("Projeler yüklenemedi");
     }
+    return await res.json();
+  } catch (error) {
+     throw new Error("Veri çekilirken bir hata oluştu: " + error);
+  }
 }
